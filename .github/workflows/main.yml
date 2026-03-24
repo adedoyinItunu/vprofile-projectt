@@ -4,6 +4,7 @@ on:
   push:
     branches: [ main ]
   workflow_dispatch:
+
 jobs:
   test:
     name: Test the Pipeline
@@ -18,7 +19,8 @@ jobs:
 
       - name: List project files
         run: ls -la
-         name: Set up JDK 17
+
+      - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           java-version: '17'
