@@ -67,6 +67,7 @@ jobs:
           echo "VERSION_LABEL=$VERSION_LABEL" >> $GITHUB_ENV
 
      
+
       - name: Deploy to Beanstalk
         run: |
           aws elasticbeanstalk update-environment \
