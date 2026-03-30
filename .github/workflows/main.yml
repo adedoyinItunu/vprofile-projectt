@@ -59,20 +59,11 @@ jobs:
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
           aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Upload artifact to S3
-        run: |
-          TIMESTAMP=$(date +%Y%m%d%H%M%S)
-          VERSION_LABEL=vprofile-$TIMESTAMP
-          aws s3 cp target/vprofile-v2.war s3://${{ secrets.S3_BUCKET }}/$VERSION_LABEL.war
-          echo "VERSION_LABEL=$VERSION_LABEL" >> $GITHUB_ENV
-
-     
-
       - name: Deploy to Beanstalk
         run: |
           aws elasticbeanstalk update-environment \
-            --application-name ${{ secrets.EB_APP_NAME }} \
-            --environment-name ${{ secrets.EB_ENV_NAME }} \
+            --application-name ${{ secrets.EB_APPLICATION_NAME }} \
+            --environment-name ${{ secrets.EB_ENVIRONMENT_NAME }} \
             --version-label ${{ env.VERSION_LABEL }}
 
       - name: Deployment complete
